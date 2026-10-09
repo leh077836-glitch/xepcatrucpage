@@ -6,6 +6,10 @@
   "outputDirectory": "vercel-public",
   "rewrites": [
     {
+      "source": "/",
+      "destination": "https://pageops-lich-truc.leh077836.workers.dev/"
+    },
+    {
       "source": "/:path*",
       "destination": "https://pageops-lich-truc.leh077836.workers.dev/:path*"
     }
