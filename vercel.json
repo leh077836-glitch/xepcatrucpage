@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "",
-  "buildCommand": "node -e \"require('fs').mkdirSync('vercel-public',{recursive:true})\"",
+  "buildCommand": "node -e \"const fs=require('fs');fs.mkdirSync('vercel-public',{recursive:true});fs.writeFileSync('vercel-public/__pageops_build.txt','PageOps proxy deployment')\"",
   "outputDirectory": "vercel-public",
   "rewrites": [
     {
