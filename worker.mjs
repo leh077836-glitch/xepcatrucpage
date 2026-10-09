@@ -73,7 +73,7 @@ export default {
   const html=source=>{const nonce=random(18);headers.set('Content-Type','text/html; charset=utf-8');headers.set('Content-Security-Policy',`default-src 'none'; script-src 'nonce-${nonce}'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'self'; frame-ancestors 'none'`);return new Response(source.replace(/<script>/g,'<script nonce="'+nonce+'">'),{headers});};
   try{
    const url=new URL(request.url),route=url.pathname,db=env.DB;
-   const origin=()=>{if(request.headers.get('Origin')!==url.origin)fail(403,'Yêu cầu không đến từ trang web này.');};
+   const origin=()=>{const incoming=request.headers.get('Origin');const allowed=typeof env.ALLOWED_ORIGIN==='string'?env.ALLOWED_ORIGIN.trim():'';if(incoming!==url.origin&&(!allowed||incoming!==allowed))fail(403,'Yêu cầu không đến từ trang web này.');};
    const cookie=(v,age)=>'pageops_session='+v+'; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age='+age;
    const readState=async()=>{const row=await db.prepare('SELECT * FROM schedule WHERE id=1').first();if(!row)fail(503,'Cần khởi tạo cơ sở dữ liệu.');return {...JSON.parse(row.data),revision:row.revision,updatedAt:row.updated_at};};
    if(route==='/healthz'&&request.method==='GET')return json(200,{ok:true});

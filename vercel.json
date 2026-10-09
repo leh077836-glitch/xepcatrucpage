@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "node -e \"require('fs').mkdirSync('vercel-public',{recursive:true})\"",
+  "outputDirectory": "vercel-public",
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "https://pageops-lich-truc.leh077836.workers.dev/:path*"
+    }
+  ]
+}
