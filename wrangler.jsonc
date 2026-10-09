@@ -4,6 +4,6 @@
   "compatibility_date": "2026-10-10",
   "workers_dev": true,
   "d1_databases": [
-    { "binding": "DB", "database_name": "pageops-db", "database_id": "REPLACE_WITH_DATABASE_ID" }
+    { "binding": "DB", "database_name": "pageops-db", "database_id": "cdc5211d-afad-45de-a5b1-07669018a4b3" }
   ]
 }
