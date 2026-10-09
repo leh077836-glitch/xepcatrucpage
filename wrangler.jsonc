@@ -1,0 +1,9 @@
+{
+  "name": "pageops-lich-truc",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-10",
+  "workers_dev": true,
+  "d1_databases": [
+    { "binding": "DB", "database_name": "pageops-db", "database_id": "REPLACE_WITH_DATABASE_ID" }
+  ]
+}

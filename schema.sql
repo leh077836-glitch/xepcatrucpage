@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS credentials(role TEXT PRIMARY KEY,salt TEXT NOT NULL,password_hash TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS sessions(token_hash TEXT PRIMARY KEY,role TEXT NOT NULL,csrf TEXT NOT NULL,expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS attempts(key TEXT PRIMARY KEY,count INTEGER NOT NULL,until INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS schedule(id INTEGER PRIMARY KEY CHECK(id=1),revision INTEGER NOT NULL,data TEXT NOT NULL,updated_at TEXT NOT NULL,action TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS history(id INTEGER PRIMARY KEY AUTOINCREMENT,revision INTEGER NOT NULL,data TEXT NOT NULL,action TEXT NOT NULL,updated_at TEXT NOT NULL);
+CREATE INDEX IF NOT EXISTS sessions_expiry ON sessions(expires);
+CREATE TRIGGER IF NOT EXISTS schedule_history AFTER UPDATE ON schedule BEGIN
+ INSERT INTO history(revision,data,action,updated_at) VALUES(new.revision,new.data,new.action,new.updated_at);
+ DELETE FROM history WHERE id NOT IN (SELECT id FROM history ORDER BY id DESC LIMIT 30);
+END;
