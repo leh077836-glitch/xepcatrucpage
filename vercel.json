@@ -6,6 +6,14 @@
   "outputDirectory": "vercel-public",
   "rewrites": [
     {
+      "source": "/t/:path*",
+      "destination": "https://pageops-lich-truc.leh077836.workers.dev/t/:path*"
+    },
+    {
+      "source": "/saas/platform/rooms",
+      "destination": "https://pageops-lich-truc.leh077836.workers.dev/saas/platform/rooms"
+    },
+    {
       "source": "/",
       "destination": "https://pageops-lich-truc.leh077836.workers.dev/"
     },
